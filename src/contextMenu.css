@@ -1,0 +1,51 @@
+.container {
+    display: block;
+    height: 100vh;
+}
+
+.element {
+    display: flex;
+    justify-content: center;
+    padding: 100px;
+}
+
+.context-menu {
+    visibility: hidden;
+    opacity: 0;
+    background-color: #c452cf;
+    position: fixed;
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.context-menu.active {  
+    visibility: visible;
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.context-menu button { 
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.context-menu button:hover {
+    border: 0;
+    border: 1px solid white;
+    background-color: transparent;
+    margin: 5px 0;
+}
+
+.context-menu.icon {
+    opacity: 1;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
