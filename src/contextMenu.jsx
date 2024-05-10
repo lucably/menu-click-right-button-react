@@ -10,7 +10,7 @@ const ContextMenu = ({
   contextMenuRef,
 }) => {
   return (
-    <div onClick={() => console.log("cliquei")}>
+    <div>
       <menu
         style={{
           top: positionY + 2 + "px",
@@ -41,4 +41,31 @@ const ContextMenu = ({
   );
 };
 
-export default ContextMenu;
+const handleOnContextMenu = (e, contextMenuRef, setContextMenu, elementClicked) => {
+  e.preventDefault();
+  if(!contextMenuRef.current) return
+  const contextMenuAttr = contextMenuRef.current.getBoundingClientRect();
+
+  console.log('contextMenuAttr',contextMenuAttr)
+  
+  const isLeft = e.clientX < window?.innerWidth / 2
+
+  let x;
+  let y = e.clientY
+
+  if(isLeft) {
+    x = e.clientX
+  } else {
+    x = e.clientX - contextMenuAttr.width
+  }
+  console.log('elementClicked', elementClicked)
+  setContextMenu({
+    position: {
+      x,
+      y
+    },
+    toggled: true
+  })
+}
+
+export {ContextMenu, handleOnContextMenu};

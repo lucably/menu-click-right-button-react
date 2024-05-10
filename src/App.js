@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import './contextMenu.css';
-import ContextMenu from "./contextMenu.jsx";
+import { handleOnContextMenu, ContextMenu } from "./contextMenu.jsx";
 
 const App = () => {
 
@@ -14,37 +14,10 @@ const App = () => {
 
   const contextMenuRef = useRef(null);
 
-  const handleOnContextMenu = (e, elementClicked) => {
-    e.preventDefault();
-    if(!contextMenuRef.current) return
-    const contextMenuAttr = contextMenuRef.current.getBoundingClientRect();
-
-    console.log('contextMenuAttr',contextMenuAttr)
-    
-    const isLeft = e.clientX < window?.innerWidth / 2
-
-    let x;
-    let y = e.clientY
-
-    if(isLeft) {
-      x = e.clientX
-    } else {
-      x = e.clientX - contextMenuAttr.width
-    }
-    console.log('elementClicked', elementClicked)
-    setContextMenu({
-      position: {
-        x,
-        y
-      },
-      toggled: true
-    })
-  }
-
   return (<>
     <div className='container' onClick={() => setContextMenu({...contextMenu, toggled: false})}>
       <div>
-        <p className='element' onContextMenu={(event) => handleOnContextMenu(event )}>
+        <p className='element' onContextMenu={(event) => handleOnContextMenu(event, contextMenuRef, setContextMenu )}>
           Click me with right button
         </p>
       </div>
